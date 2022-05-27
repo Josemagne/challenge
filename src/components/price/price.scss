@@ -1,0 +1,22 @@
+.price {
+  width: 50%;
+  grid-area: price;
+
+  // TODO Change name
+  .container {
+    display: flex;
+  }
+
+  .price__change {
+    width: fit-content;
+    .price__change__change {
+      color: black;
+      &.positive {
+        color: #67bf6b;
+      }
+      &.negative {
+        color: red;
+      }
+    }
+  }
+}

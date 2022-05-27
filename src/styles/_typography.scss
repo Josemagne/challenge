@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "Circular";
+  // NOTE bold
+  font-weight: 800;
+  src: local("Circular"), url("./fonts/CircularStd-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Circular";
+  // NOTE regular
+  font-weight: 400;
+  src: local("Circular"),
+    url("./fonts/CircularStd-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Circular";
+  // NOTE thin
+  font-weight: 100;
+  src: local("Circular"),
+    url("./fonts/CircularStd-Medium.ttf") format("truetype");
+}
+
+html {
+  font-family: "Circular";
+}
