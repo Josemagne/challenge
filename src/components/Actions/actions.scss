@@ -1,0 +1,39 @@
+@import "../../styles/abstracts//colors";
+
+.actions {
+  grid-area: actions;
+
+  width: 100%;
+  height: fit-content;
+
+  display: flex;
+
+  .actions__fullscreen {
+    margin-right: 2rem;
+
+    &:hover {
+      color: $primary-color;
+    }
+    .fullscreen {
+      svg {
+        margin-right: 0.5rem;
+        &:hover {
+          stroke: $primary-color;
+        }
+      }
+      display: flex;
+    }
+  }
+  .actions__compare {
+    margin-right: 9rem;
+    .compare {
+      svg {
+        margin-right: 0.5rem;
+      }
+      display: flex;
+    }
+  }
+
+  .actions__time {
+  }
+}

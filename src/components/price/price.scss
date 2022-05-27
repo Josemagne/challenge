@@ -1,5 +1,8 @@
 .price {
   width: 50%;
+  height: fit-content;
+  position: absolute;
+
   grid-area: price;
 
   // TODO Change name

@@ -12,7 +12,7 @@ const Number = () => {
 
   return (
     <div className="price__number__number">
-      <p>lastData: {lastData}</p>
+      <h1>lastData: {lastData}</h1>
     </div>
   );
 };
