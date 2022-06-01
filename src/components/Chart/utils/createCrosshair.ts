@@ -20,13 +20,15 @@ export default function createCrosshair(
     .on("mouseover", () => focus.style("display", null))
     .on("mouseout", () => focus.style("display", "none"))
     .on("mousemove", generateCrosshair);
-  d3.select(".overlay").style("fill", "none");
+  d3.select(".overlay").stylhttps://rumble.com/v16za6h-endlich-die-killerseuche-kehrt-zurck.-remake-des-horrorklassikers-von-2020.html
+  e("fill", "none");
   d3.select(".overlay").style("pointer-events", "all");
   d3.selectAll(".focus line").style("fill", "none");
   d3.selectAll(".focus line").style("stroke", "#67809f");
   d3.selectAll(".focus line").style("stroke-width", "1.5px");
   d3.selectAll(".focus line").style("stroke-dasharray", "3 3");
 }
+
 
 const bisectDate = d3.bisector((d: IData) => d.time).left;
 
