@@ -1,23 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface IData {
-  [date: string]: {
-    open: string;
-    high: string;
-    low: string;
-    close: string;
-    volume: string;
-  };
+  open: string;
+  high: string;
+  low: string;
+  close: string;
+  volume: string;
+  time: Date;
 }
 
 interface InitialState {
   /**
    * The data for the scope
    */
-  data: {
-    // NOTE The date is in date format "YYYY-MM-DD HH:MM:SS"
-    [date: string]: IData;
-  };
+  data: IData[];
 }
 
 const dt = new Date();
@@ -36,7 +32,7 @@ console.log(
 );
 
 const initialState: InitialState = {
-  data: {},
+  data: [],
 };
 
 const dataSlice = createSlice({
@@ -48,11 +44,12 @@ const dataSlice = createSlice({
      * @param state
      * @param param1
      */
-    addData: (
-      state: InitialState,
-      { payload: data }: PayloadAction<IData>
-    ) => {},
+    addData: (state: InitialState, { payload: data }: PayloadAction<IData>) => {
+      state.data.push(data);
+    },
   },
 });
+
+export const { addData } = dataSlice.actions;
 
 export default dataSlice.reducer;

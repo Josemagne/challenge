@@ -1,3 +1,16 @@
+@import "../../styles/abstracts/colors";
 .chart {
   grid-area: chart;
+
+  width: fit-content;
+  height: fit-content;
+
+  svg {
+    width: fit-content;
+    height: fit-content;
+
+    #priceChart {
+      stroke: $primary-color;
+    }
+  }
 }
