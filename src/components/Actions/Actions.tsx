@@ -4,7 +4,11 @@ import Compare from "./SubComponents/Compare/Compare";
 import Time from "./SubComponents/Time/Time";
 import "./actions.scss";
 
-const Actions = () => {
+interface ActionsProps {
+  setTime: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Actions = ({ setTime }: ActionsProps) => {
   return (
     <div className="actions">
       <div className="actions__fullscreen">
@@ -14,7 +18,7 @@ const Actions = () => {
         <Compare />
       </div>
       <div className="actions__time">
-        <Time />
+        <Time setTime={setTime} />
       </div>
     </div>
   );

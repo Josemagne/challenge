@@ -5,7 +5,17 @@ export const data$ = new Subject();
 /**
  * Array that contains the data stock data over time
  */
-export const progressiveData: any[] = [];
+export const progressiveData: {
+  open: number,
+  high: number,
+  low: number,
+  close: number,
+  volume: number,
+  /**
+   * time in seconds since 1970, 1st january
+   */
+  time: number
+}[] = [];
 
 /**
  * Emits value every second
@@ -28,13 +38,15 @@ function emitter(data: any[]) {
 
   const interval = setInterval(() => {
     const next = dataCopy.splice(0, 20);
-    if (next) {
+
+    if (next.length > 0) {
       data$.next(next);
-    } else {
+    }
+    else {
       data$.complete();
       clearInterval(interval);
     }
-  }, 100);
+  }, 500);
 }
 
 /**

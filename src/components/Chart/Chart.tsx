@@ -10,6 +10,9 @@ import getAverage from "./utils/average";
 import { data$, simulateAPI, progressiveData } from "./utils/simulateAPI";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import { dispatch } from "d3";
+import { first, take, tap } from "rxjs";
+
+type TimeString = "1d" | "3d" | "1w" | "1m" | "6m" | "1y" | "max";
 
 /**
  * Makes the chart responsive
@@ -45,17 +48,55 @@ function responsivefy(svg: any) {
 
 const margins = { top: 50, right: 50, bottom: 50, left: 50 };
 
-const Chart = () => {
+interface ChartProps {
+  setPrice: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Chart = ({ setPrice }: ChartProps) => {
   const [width, setWidth] = useState(400 + margins.left + margins.right);
   const [height, setHeight] = useState(300 + margins.bottom + margins.top);
-  const [chartData, setChartData] = useState(transformData(data));
+  // const [chartData, setChartData] = useState(transformData(data));
   const [transBitcoinData, setTransBitcoinData] = useState(bitcoinData);
   // The bitcoin data over time
-  const [timeBitcoinData, setTimeBitcoinData] = useState<any[]>([]);
+  // const [timeBitcoinData, setTimeBitcoinData] = useState<any[]>([]);
   const [minMax, setMinMax] = useState(getMinMax(transBitcoinData));
+  const [_time, _setTime] = useState("max");
   let xScale: any;
   let yScale: any;
   let chart: any;
+
+  function updateTime(timeString: TimeString) {
+    switch (timeString) {
+      case "1d": {
+        setMinMax((prev) => {
+          return { ...prev };
+        });
+      }
+      case "3d":
+        {
+        }
+
+        break;
+      case "1w":
+        {
+        }
+        break;
+      case "1m":
+        {
+        }
+        break;
+      case "6m":
+        {
+        }
+        break;
+      case "1y":
+        {
+        }
+        break;
+      case "max": {
+      }
+    }
+  }
 
   function createChart() {
     chart = d3
@@ -156,18 +197,25 @@ const Chart = () => {
       .style("fill", "none")
       .attr("id", "priceChart")
       .attr("stroke", "red")
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", "5px")
       // @ts-ignore
       .attr("d", line(progressiveData));
   }
 
+  const getSetPrice = (data: { open: number }) => {
+    setPrice(data.open);
+  };
+
   useEffect(() => {
     simulateAPI(transBitcoinData);
     createChart();
+    data$.subscribe((v) => console.log(`time: ${JSON.stringify(v)}`));
     const sub = data$.subscribe({
       next: (v: any) => {
         const copy = JSON.parse(JSON.stringify(v));
         progressiveData.push(...copy);
+        getSetPrice(progressiveData[progressiveData.length - 1]);
+
         updateChart();
       },
       error: (err) => {},
@@ -175,10 +223,6 @@ const Chart = () => {
         sub.unsubscribe();
       },
     });
-
-    return () => {
-      sub.unsubscribe();
-    };
   }, []);
 
   return <div className="chart"></div>;

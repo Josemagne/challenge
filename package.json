@@ -9,9 +9,10 @@
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
     "rxjs": "^7.5.5",
+    "shepherd.js": "^11.0.1",
     "typescript": "^4.7.2",
     "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^5.0.1"
   },
   "name": "challenge",
   "description": "Frontend challenges",

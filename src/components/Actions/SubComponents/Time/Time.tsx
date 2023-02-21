@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import "./time.scss";
 
-const Time = () => {
+type TimeString = "1d" | "3d" | "1w" | "1m" | "6m" | "1y" | "max";
+const timeData: TimeString[] = ["1d", "3d", "1w", "1m", "6m", "1y", "max"];
+
+interface TimeProps {
+  setTime: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Time = ({ setTime }: TimeProps) => {
   // NOTE Here also. This would be in the store
   const [selectedTime, setSelectedTime] = useState("1w");
+  const [_time, _setTime] = useState("max");
 
-  const timeData = ["1d", "3d", "1w", "1m", "6m", "1y", "max"];
-
-  function clickHandler(timeName: string) {
+  function clickHandler(timeName: TimeString) {
     setSelectedTime(timeName);
+    _setTime(timeName);
+    setTime(timeName);
   }
 
   const timeDataMetadata = timeData.map((t) => {
     return {
       name: t,
-      class: selectedTime === t ? `selected time__${t}` : `time__${t}`,
-      clickHandler: () => clickHandler(t),
+      className: selectedTime === t ? `selected time__${t}` : `time__${t}`,
+      onClick: () => clickHandler(t),
     };
   });
 
@@ -23,7 +31,7 @@ const Time = () => {
     <div className="time">
       {timeDataMetadata.map((t) => {
         return (
-          <div className={t.class} onClick={t.clickHandler}>
+          <div {...timeDataMetadata}>
             <p>{t.name}</p>
           </div>
         );
